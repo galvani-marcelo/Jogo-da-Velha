@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:jogo_da_velha"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="Jogo da Velha" Height="479" Width="800">
+        Title="Jogo da Velha " Height="479" Width="800">
 
     <StackPanel Margin="40">
         <Grid x:Name="board" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40">
