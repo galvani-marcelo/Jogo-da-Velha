@@ -32,9 +32,14 @@
             <Button Grid.Column="2" Grid.Row="2" Tag="8" Click="Item_Board_Click_Button" >🤖</Button>
             
         </Grid>
-        <Border Margin="13">
+        <Border x:Name="winner_border"  Visibility="Collapsed" Margin="13">
             <Label x:Name="winner_label" HorizontalAlignment="Center" FontStyle="Oblique" FontWeight="UltraLight" FontSize="20" >✖︎</Label>
         </Border>
+
+        <Border x:Name="player_border" Margin="13">
+            <Label x:Name="player_label" HorizontalAlignment="Center" FontStyle="Oblique" FontWeight="UltraLight" FontSize="20" >✖︎</Label>
+        </Border>
+
         <Button Width="90" Click="New_Game_Button">New Game</Button>
     </StackPanel>
 

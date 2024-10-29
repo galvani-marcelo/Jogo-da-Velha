@@ -35,12 +35,14 @@ namespace jogo_da_velha
             {
                 velha.SetPlayerBoard(player_index);
                 button.Content = velha.Player;
-                winner_label.Content = velha.NextPlayer;
+                player_label.Content = velha.NextPlayer;
 
                 // Verifica se há um vencedor na partida.
                 bool isVictory = velha.isVictory();
                 if (isVictory)
                 {
+                    player_border.Visibility = Visibility.Collapsed;
+                    winner_border.Visibility = Visibility.Visible;
                     winner_label.Content = $"Player {velha.Player} won!";
                     return;
                 }
@@ -49,6 +51,8 @@ namespace jogo_da_velha
                 bool oldWoman = velha.OldWoman();
                 if (oldWoman)
                 {
+                    player_border.Visibility = Visibility.Collapsed;
+                    winner_border.Visibility = Visibility.Visible;
                     winner_label.Content = "It's a draw!";
                     return;
                 }
@@ -58,7 +62,10 @@ namespace jogo_da_velha
         private void New_Game_Button(object sender, RoutedEventArgs e)
         {
             velha = new Velha();
-            winner_label.Content = "✖︎";
+            player_label.Content = "✖︎";
+            winner_border.Visibility= Visibility.Collapsed;
+            winner_label.Content = "";
+            player_border.Visibility = Visibility.Visible;
             foreach (var item in board.Children.OfType<Button>())
             {
                 item.Content = "🤖"; // Reinicia o conteúdo dos botões
