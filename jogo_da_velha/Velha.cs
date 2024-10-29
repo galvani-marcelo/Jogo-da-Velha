@@ -67,7 +67,7 @@ namespace jogo_da_velha
             return (board[position] == PLAYER.NONE);
         }
 
-        public string GetJogador(int position)
+        public string GetPlayerIndex(int position)
         {
             string result = string.Empty;
             switch (this.board[position])
@@ -82,7 +82,7 @@ namespace jogo_da_velha
             return result;
         }
 
-        public string GetJogador()
+        public string GetPlayer()
         {
             string result = string.Empty;
 

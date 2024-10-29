@@ -42,9 +42,9 @@ namespace jogo_da_velha
             if (velha.isIndexEmpty(player_index) && !velha.CheckWin())
             {
                 velha.SetPlayerBoard(player_index);
-                player = velha.GetJogador(player_index);
+                player = velha.GetPlayerIndex(player_index);
                 button.Content = player;
-                winner_label.Content = velha.GetJogador();
+                winner_label.Content = velha.GetPlayer();
 
                 if (velha.CheckWin() && velha.GetMoveCounter() < Velha.MAX_MOVE)
                     winner_label.Content = $"Jogador {player} venceu!";
