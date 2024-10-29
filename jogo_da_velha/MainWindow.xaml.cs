@@ -27,26 +27,30 @@ namespace jogo_da_velha
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string player = string.Empty;
             Button button = (Button)sender;
             if (velha is null)
                 return;
 
-            string? player_index = button.Tag.ToString();
+            string? tag_index = button.Tag.ToString();
 
-            if (player_index is null)
-                return ;
+            if (tag_index is null)
+                return;
 
-            if (velha.isPlayerOnBoard(player_index))
+            int player_index = 0;
+            int.TryParse(tag_index, out player_index);
+            if (velha.isIndexEmpty(player_index) && !velha.CheckWin())
             {
                 velha.SetPlayerBoard(player_index);
-                string player = velha.GetJogador(player_index);
+                player = velha.GetJogador(player_index);
                 button.Content = player;
                 winner_label.Content = velha.GetJogador();
+
                 if (velha.CheckWin() && velha.GetMoveCounter() < Velha.MAX_MOVE)
                     winner_label.Content = $"Jogador {player} venceu!";
                 else if (velha.GetMoveCounter() == Velha.MAX_MOVE)
                     winner_label.Content = $"Deu Velha 👩🏽‍🦳";
-
+                    return;
             }
 
         }

@@ -17,12 +17,12 @@ namespace jogo_da_velha
         BOX_O
     };
 
-    
+
     public class Velha
     {
-        public const int MAX_MOVE = 9; 
+        public const int MAX_MOVE = 9;
         private PLAYER player = PLAYER.MAN_X;
-        private PLAYER backup_player = PLAYER.NONE;
+        private PLAYER backup_player = PLAYER.MAN_X;
         private int moveCounter = 0;
 
         public PLAYER[] board = new PLAYER[MAX_MOVE]
@@ -40,24 +40,21 @@ namespace jogo_da_velha
 
 
 
-        public void SetPlayerBoard(string position)
+        public void SetPlayerBoard(int position)
         {
-            int index = -1;
-            if (int.TryParse(position, out index))
+ 
+            switch (player)
             {
-                switch (player)
-                {
-                    case PLAYER.MAN_X:
-                        board[index] = PLAYER.MAN_X;
-                        player = PLAYER.BOX_O;
-                        break;
-                    case PLAYER.BOX_O:
-                        board[index] = PLAYER.BOX_O;
-                        player = PLAYER.MAN_X;
-                        break;
-                }
-                backup_player = board[index];
+                case PLAYER.MAN_X:
+                    board[position] = PLAYER.MAN_X;
+                    player = PLAYER.BOX_O;
+                    break;
+                case PLAYER.BOX_O:
+                    board[position] = PLAYER.BOX_O;
+                    player = PLAYER.MAN_X;
+                    break;
             }
+            backup_player = board[position];
             moveCounter++;
         }
 
@@ -65,29 +62,22 @@ namespace jogo_da_velha
         {
             return moveCounter;
         }
-        public bool isPlayerOnBoard(string position)
+        public bool isIndexEmpty(int position)
         {
-            int index = -1;
-            if (int.TryParse(position, out index))
-                return (board[index] == PLAYER.NONE);
-            return false;
+            return (board[position] == PLAYER.NONE);
         }
 
-        public string GetJogador(string position)
+        public string GetJogador(int position)
         {
-            int index = -1;
             string result = string.Empty;
-            if (int.TryParse(position, out index))
+            switch (this.board[position])
             {
-                switch (this.board[index])
-                {
-                    case PLAYER.MAN_X:
-                        result = "✖︎";
-                        break;
-                    case PLAYER.BOX_O:
-                        result = "⚫";
-                        break;
-                }
+                case PLAYER.MAN_X:
+                    result = "✖︎";
+                    break;
+                case PLAYER.BOX_O:
+                    result = "⚫";
+                    break;
             }
             return result;
         }
