@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System.DirectoryServices.ActiveDirectory;
+using System.Numerics;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,50 +20,59 @@ namespace jogo_da_velha
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Velha? velha { get; set; }
+        public Velha velha { get; set; }
         public MainWindow()
         {
             velha = new Velha();
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Item_Board_Click_Button(object sender, RoutedEventArgs e)
         {
-            string player = string.Empty;
             Button button = (Button)sender;
-            if (velha is null)
-                return;
+            string? tag_index = button.Tag?.ToString(); // Usar operador de coalescência nula
 
-            string? tag_index = button.Tag.ToString();
-
+            // Verifica se a tag está nula.
             if (tag_index is null)
                 return;
 
+            // Converte o tag_index para um tipo inteiro.
             int player_index = 0;
             int.TryParse(tag_index, out player_index);
-            if (velha.isIndexEmpty(player_index) && !velha.CheckWin())
+
+            // Verifica se o índice do tabuleiro está vazio.
+            bool isMoveValid = velha.isIndexEmpty(player_index) && !velha.isVictory();
+            if (isMoveValid)
             {
                 velha.SetPlayerBoard(player_index);
-                player = velha.Player;
-                button.Content = player;
+                button.Content = velha.Player;
                 winner_label.Content = velha.NextPlayer;
 
-                if (velha.CheckWin() && velha.GetMoveCounter() < Velha.MAX_MOVE)
-                    winner_label.Content = $"Jogador {player} venceu!";
-                else if (velha.GetMoveCounter() == Velha.MAX_MOVE)
-                    winner_label.Content = $"Deu Velha 👩🏽‍🦳";
+                // Verifica se há um vencedor na partida.
+                bool isVictory = velha.isVictory();
+                if (isVictory)
+                {
+                    winner_label.Content = $"Player {velha.Player} won!";
                     return;
-            }
+                }
 
+                // Verifica se a partida terminou em velha.
+                bool oldWoman = velha.OldWoman();
+                if (oldWoman)
+                {
+                    winner_label.Content = "It's a draw!";
+                    return;
+                }
+            }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void New_Game_Button(object sender, RoutedEventArgs e)
         {
             velha = new Velha();
             winner_label.Content = "✖︎";
             foreach (var item in board.Children.OfType<Button>())
             {
-                item.Content = "🤖";
+                item.Content = "🤖"; // Reinicia o conteúdo dos botões
             }
         }
     }

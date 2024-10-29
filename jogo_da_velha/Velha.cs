@@ -71,9 +71,9 @@ namespace jogo_da_velha
             moveCounter++;
         }
 
-        public int GetMoveCounter()
+        public bool OldWoman()
         {
-            return moveCounter;
+            return moveCounter == Velha.MAX_MOVE; ;
         }
         public bool isIndexEmpty(int position)
         {
@@ -101,9 +101,9 @@ namespace jogo_da_velha
         }
 
 
-        public bool CheckWin()
+        public bool isVictory()
         {
-            return CheckHorizontal() || CheckVertical() || CheckDiagonal();
+            return CheckHorizontal() || CheckVertical() || CheckDiagonal() && moveCounter < MAX_MOVE;
         }
     }
 
