@@ -80,7 +80,7 @@ namespace jogo_da_velha
         #endregion
 
         /// <summary>
-        /// Obtém o jogador que está atualmente jogando.
+        /// Obtém o jogador que fez a última jogada.
         /// </summary>
         public string Player { get { return playerTxt; } }
 
