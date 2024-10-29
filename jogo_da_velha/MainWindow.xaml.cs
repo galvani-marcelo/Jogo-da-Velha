@@ -1,17 +1,6 @@
-﻿using System.DirectoryServices.ActiveDirectory;
-using System.Numerics;
-using System.Security;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using jogo_da_velha;
+
 
 namespace jogo_da_velha
 {
@@ -41,7 +30,7 @@ namespace jogo_da_velha
             int.TryParse(tag_index, out player_index);
 
             // Verifica se o índice do tabuleiro está vazio.
-            bool isMoveValid = velha.isIndexEmpty(player_index) && !velha.isVictory();
+            bool isMoveValid = velha.isItemBoardEmpty(player_index) && !velha.isVictory();
             if (isMoveValid)
             {
                 velha.SetPlayerBoard(player_index);

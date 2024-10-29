@@ -67,15 +67,17 @@ namespace jogo_da_velha
                     playerTxt = "⚫";
                     break;
             }
+            
             backup_player = board[position];
             moveCounter++;
         }
+
 
         public bool OldWoman()
         {
             return moveCounter == Velha.MAX_MOVE; ;
         }
-        public bool isIndexEmpty(int position)
+        public bool isItemBoardEmpty(int position)
         {
             return (board[position] == PLAYER.NONE);
         }
@@ -100,7 +102,7 @@ namespace jogo_da_velha
                     board[0] == backup_player && board[4] == backup_player && board[8] == backup_player);
         }
 
-
+        
         public bool isVictory()
         {
             return CheckHorizontal() || CheckVertical() || CheckDiagonal() && moveCounter < MAX_MOVE;
