@@ -21,9 +21,15 @@ namespace jogo_da_velha
     public class Velha
     {
         public const int MAX_MOVE = 9;
-        private PLAYER player = PLAYER.MAN_X;
+
+        private string playerTxt = string.Empty;
+        private string nextPlayerTxt = string.Empty;
         private PLAYER backup_player = PLAYER.MAN_X;
+        private PLAYER player = PLAYER.MAN_X;
         private int moveCounter = 0;
+        private int position = 0;
+   
+
 
         public PLAYER[] board = new PLAYER[MAX_MOVE]
         {
@@ -39,19 +45,26 @@ namespace jogo_da_velha
         };
 
 
+        public string Player { get {  return playerTxt; } }
 
-        public void SetPlayerBoard(int position)
+        public string NextPlayer { get { return nextPlayerTxt; } }
+
+        public void SetPlayerBoard(int index)
         {
- 
+            position = index;
             switch (player)
             {
                 case PLAYER.MAN_X:
                     board[position] = PLAYER.MAN_X;
                     player = PLAYER.BOX_O;
+                    nextPlayerTxt = "⚫";
+                    playerTxt = "✖︎";
                     break;
                 case PLAYER.BOX_O:
                     board[position] = PLAYER.BOX_O;
                     player = PLAYER.MAN_X;
+                    nextPlayerTxt = "✖︎";
+                    playerTxt = "⚫";
                     break;
             }
             backup_player = board[position];
@@ -65,38 +78,6 @@ namespace jogo_da_velha
         public bool isIndexEmpty(int position)
         {
             return (board[position] == PLAYER.NONE);
-        }
-
-        public string GetPlayerIndex(int position)
-        {
-            string result = string.Empty;
-            switch (this.board[position])
-            {
-                case PLAYER.MAN_X:
-                    result = "✖︎";
-                    break;
-                case PLAYER.BOX_O:
-                    result = "⚫";
-                    break;
-            }
-            return result;
-        }
-
-        public string GetPlayer()
-        {
-            string result = string.Empty;
-
-            switch (player)
-            {
-                case PLAYER.MAN_X:
-                    result = "✖︎";
-                    break;
-                case PLAYER.BOX_O:
-                    result = "⚫";
-                    break;
-            }
-
-            return result;
         }
 
         private bool CheckHorizontal()
