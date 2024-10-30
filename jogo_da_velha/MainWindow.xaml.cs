@@ -19,7 +19,7 @@ namespace jogo_da_velha
         private void Item_Board_Click_Button(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            string? tag_index = button.Tag?.ToString(); // Usar operador de coalescência nula
+            string? tag_index = button.Tag?.ToString(); 
 
             // Verifica se a tag está nula.
             if (tag_index is null)
@@ -29,7 +29,7 @@ namespace jogo_da_velha
             int player_index = 0;
             int.TryParse(tag_index, out player_index);
 
-            // Verifica se o índice do tabuleiro está vazio.
+            // Verifica se o índice do tabuleiro está vazio e se não houve vitória.
             bool isMoveValid = velha.isItemBoardEmpty(player_index) && !velha.isVictory();
             if (isMoveValid)
             {

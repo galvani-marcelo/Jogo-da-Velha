@@ -36,7 +36,7 @@ namespace jogo_da_velha
         public const int MAX_MOVE = 9;
 
         private int position = 0;
-        private int moveCounter = 0;
+        private int moveCount = 0;
 
         private string playerTxt = string.Empty;
         private string nextPlayerTxt = string.Empty;
@@ -44,8 +44,8 @@ namespace jogo_da_velha
         private PLAYER player = PLAYER.MAN_X;
         private PLAYER backup_player = PLAYER.MAN_X;
 
-        private PLAYER[] board = new PLAYER[MAX_MOVE]
-        {
+        private PLAYER[] board =
+        [
             PLAYER.NONE,
             PLAYER.NONE,
             PLAYER.NONE,
@@ -55,7 +55,7 @@ namespace jogo_da_velha
             PLAYER.NONE,
             PLAYER.NONE,
             PLAYER.NONE
-        };
+        ];
 
         #region funções privada 
         private bool CheckHorizontal()
@@ -113,7 +113,7 @@ namespace jogo_da_velha
             }
 
             backup_player = board[position];
-            moveCounter++;
+            moveCount++;
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace jogo_da_velha
         /// </returns>
         public bool OldWoman()
         {
-            return moveCounter == Velha.MAX_MOVE; ;
+            return moveCount == Velha.MAX_MOVE && !this.isVictory();
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace jogo_da_velha
         /// </returns>
         public bool isVictory()
         {
-            return CheckHorizontal() || CheckVertical() || CheckDiagonal() && moveCounter < MAX_MOVE;
+            return CheckHorizontal() || CheckVertical() || CheckDiagonal() && moveCount < MAX_MOVE;
         }
 
     }
